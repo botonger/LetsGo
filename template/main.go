@@ -45,6 +45,13 @@ public Mono<{{.Method | Capitalize}}Response> {{.Method}}(@RequestBody {{.Method
 	return service.{{.Method}}({{.Method}}Request);
 }`
 
+const test = `
+POST http://localhost:8080/api/v1/networking/vpc/{{.Method}}
+Content-Type: application/json
+
+{}
+###`
+
 func ToCapitalize(s string) string {
 	for i, v := range s {
 		return string(unicode.ToUpper(v)) + s[i+1:]
@@ -104,6 +111,8 @@ func main() {
 		whichComp = controller
 	case "service":
 		whichComp = service
+	case "test":
+		whichComp = test
 	default:
 	}
 
